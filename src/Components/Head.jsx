@@ -1,10 +1,15 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { toogleMenu } from '../utils/AppSlice'
 
 const Head = () => {
+    const dispatch=useDispatch()
   return (
     <div className='grid grid-flow-col p-5 m-2 shadow-lg'>
       <div className='flex  col-span-1'>
-       <img src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png" alt="menu"  className='h-8'/>
+       <img onClick={()=>{
+         dispatch(toogleMenu())
+       }} src="https://53.fs1.hubspotusercontent-na1.net/hub/53/hubfs/What%20is%20a%20Hamburger%20Button.png?width=225&name=What%20is%20a%20Hamburger%20Button.png" alt="menu"   className='h-8 cursor-pointer'/>
         <img className='h-8 mx-2' src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Logo_of_YouTube_%282015-2017%29.svg/2560px-Logo_of_YouTube_%282015-2017%29.svg.png" alt="logo" />
       </div>
       {/* search box */}
