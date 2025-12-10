@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { YOUTUBE_VIDEOS_API } from '../utils/constants'
-import VideoCard from './VideoCard'
-import { Link } from 'react-router-dom'
-import { AdRedborderVideoCard } from './VideoCard'
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import VideoCard, { AdRedborderVideoCard } from "./VideoCard";
+import { Link } from "react-router-dom";
+import { YOUTUBE_VIDEOS_API } from "../utils/constants";
+import { setresults } from "../utils/VideoSlice";
 
+const EnhancedVideoCard = AdRedborderVideoCard(VideoCard);
 
-const Ennhanced=AdRedborderVideoCard(VideoCard)
 const VideoContainer = () => {
-  
-    const[videos,setvideos]=useState([])
-  
-    useEffect(()=>{
-   getvideos()
-    },[])
-  const getvideos=async()=>{
-    const data=await fetch(YOUTUBE_VIDEOS_API)
-    const res=await data.json()
-    // console.log(res.items)
-    setvideos(res.items)
-  }
-  
-    return (
-    <div className='flex flex-wrap'>
-       <Ennhanced info={videos[0]}/>
-        {videos.map((video)=>{
-            return(
-                <Link key={video.id} to={"/watch?v="+video.id}>
-                <VideoCard  info={video}/>  
-                
-                </Link>
-            )
-        })}
-    </div>
-  )
-}
+  const dispatch = useDispatch();
+  const videos = useSelector((store) => store.video?.results || []);
 
-export default VideoContainer
+  // Fetch popular videos on mount
+  useEffect(() => {
+    const getPopularVideos = async () => {
+      const data = await fetch(YOUTUBE_VIDEOS_API);
+      const json = await data.json();
+      dispatch(setresults(json.items || []));
+    };
+    getPopularVideos();
+  }, [dispatch]);
+
+  if (!videos || videos.length === 0) return <div>Loading...</div>;
+
+  return (
+    <div className="flex flex-wrap">
+      <EnhancedVideoCard info={videos[0]} />
+      {videos.map((video) => {
+        const videoId = video.id?.videoId || video.id;
+        return (
+          <Link key={videoId} to={"/watch?v=" + videoId}>
+            <VideoCard info={video} />
+          </Link>
+        );
+      })}
+    </div>
+  );
+};
+
+export default VideoContainer;
