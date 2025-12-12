@@ -6,3 +6,6 @@ export const YOUTUBE_SEARCH_API = "https://suggestqueries.google.com/complete/se
 
 export const SEARCH_VIDEOS_API =
   `https://youtube.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=50&key=${GOOGLE_API_KEY}&q=`;
+
+
+  export const live_chat_count=6

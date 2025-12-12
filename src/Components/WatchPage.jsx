@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/AppSlice";
 import { useParams, useSearchParams } from "react-router-dom";
 import Comments from "./Comments.jsx";
+import LiveChat from "./LiveChat.jsx";
 const WatchPage = () => {
   // const params=useParams()
   // console.log(params) empty
@@ -15,9 +16,11 @@ const WatchPage = () => {
     dispatch(closeMenu());
   }, []);
   return (
-    <div className="flex flex-col">
-    <div className="px-5">
-      <iframe
+    <div className="flex flex-col w-full">
+    <div className="flex  px-5 w-full ">
+     <div>
+
+        {/* iframe */} <iframe
         width="800"
         height="300"
         src={"https://www.youtube.com/embed/" + searchparams.get("v")}
@@ -27,6 +30,12 @@ const WatchPage = () => {
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
       ></iframe>
+    
+     </div>
+      {/* livechat */}
+       <div className="w-full ">
+      <LiveChat/>
+      </div>
     </div>
     <Comments/>
     </div>
