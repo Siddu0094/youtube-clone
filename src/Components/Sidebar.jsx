@@ -4,24 +4,26 @@ import { Link } from 'react-router-dom'
 
 const Sidebar = () => {
   const isMenuOpen = useSelector(store => store.app.isMenuOpen)
-  if(!isMenuOpen) return null
+  if (!isMenuOpen) return null
 
   return (
-    <div className='p-5 shadow-lg w-48'>
+    <div className="p-5 shadow-lg w-48 hidden md:block">
       <ul>
-        <Link to='/'><li>Home</li></Link>
+        <Link to="/"><li>Home</li></Link>
         <li>Shorts</li>
         <li>Live</li>
         <li>Videos</li>
       </ul>
-      <h1 className='font-bold pt-5'>Subscriptions</h1>
+
+      <h1 className="font-bold pt-5">Subscriptions</h1>
       <ul>
         <li>Music</li>
         <li>Sports</li>
         <li>Gaming</li>
         <li>Movies</li>
       </ul>
-      <h1 className='font-bold pt-5'>Watch Later</h1>
+
+      <h1 className="font-bold pt-5">Watch Later</h1>
       <ul>
         <li>Music</li>
         <li>Sports</li>
