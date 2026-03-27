@@ -14,10 +14,10 @@ const Head = () => {
 
   // Debounced API call for suggestions
   useEffect(() => {
-//     if (searchquery.trim() === "") {
-//   setShowSuggestions(false);
-//   return;
-// }
+    if (searchquery.trim() === "") {
+  setShowSuggestions(false);
+  return;
+ }
     if (!searchquery) return;
 
     const timer = setTimeout(() => {
